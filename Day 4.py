@@ -18,23 +18,22 @@
 
 class Solution:
     def findMinHeightTrees(self,n, edges):
-        #Base line
+        # Base line
         if n <= 2:
             return ([i for i in range(n)])
-        #if n is greater than 2, then create an array of sets with length n
+        # if n is greater than 2, then create an array of sets with length n
         neighbors = [set() for i in range(n)]
         # Create a tree that are linked with every node to maintain root and leaf node
         for start, end in edges:
             neighbors[start].add(end)
             neighbors[end].add(start)
 
-        #First layer of leaves
+        # First layer of leaves
         leaves = []
         for i in range(n):
             if len(neighbors[i]) == 1:
                 leaves.append(i)
-        print(leaves)
-        print(neighbors)
+
         # Remove the leaf nodes until we reach the end
         remaining_nodes = n
         while remaining_nodes > 2:
@@ -46,6 +45,9 @@ class Solution:
                     neighbors[neighbor].remove(leaf)
                     if len(neighbors[neighbor]) == 1:
                         new_leaves.append(neighbor)
+            leaves = new_leaves
+        print(leaves)
+        return leaves
 
 
 Solution.findMinHeightTrees("",  n = 6, edges = [[3,0],[3,1],[3,2],[3,4],[5,4]])
