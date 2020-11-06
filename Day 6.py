@@ -19,26 +19,25 @@
 import math
 class Solution:
     def smallestDivisor(self, nums, threshold):
-        # To compute the sum of all the the result of the division
-        compute_sum = lambda x: sum([math.ceil(n / x) for n in nums])
+        l = 1
+        r = max(nums)
 
-        left, right = 1, 2
-        while compute_sum(right) > threshold:
-            left = right
-            right <<= 1
-
-
-        while left <= right:
-            pivot = (right + left) >> 1
-
-            num = compute_sum(pivot)
-
-            if num > threshold:
-                left = pivot + 1
+        # Binary Search
+        while l < r:
+            #  to find the middle element
+            m = (l + r) / 2
+            # Check if the sum of the result of the division is greater than threshold
+            # If yes then the element doesnt lie there thus change the
+            # left element to middle'th element + 1
+            if sum(((i + m - 1)// m) for i in nums) > threshold:
+                l = m + 1
+            # Else the element lies inside it so change the right most element to the mid element
             else:
-                right = pivot - 1
+                r = m
+        # Return the floor of the left element
+        print(math.floor(l))
 
-        print(left)
+
 print("answer is 3")
 Solution.smallestDivisor("",  nums = [2,3,5,7,11], threshold = 11)
 print("answer is 5")
