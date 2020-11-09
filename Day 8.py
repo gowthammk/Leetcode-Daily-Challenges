@@ -43,7 +43,6 @@ class Solution:
             right = nodeSum(node.right)
             self.val += abs(left - right)
             return node.val + left + right
-
         nodeSum(root)
         return self.val
 
