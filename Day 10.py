@@ -34,6 +34,7 @@ class Solution:
         for j in a:
             b = []
             for k in j:
-                b.append(1 - k)
+                k = 1 - k
+                b.append(k)
             res.append(b)
         return(res)
